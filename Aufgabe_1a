@@ -1,0 +1,28 @@
+def frequentwords(genome, k):
+    frequentpatterns = []
+    count = [0] * len(genome)
+    for i in range(0, (len(genome) - k + 1)):
+        pattern = genome[i:i+k]
+        count[i] = patterncount(genome, pattern)
+    m = max(count)
+    for i in range(0, (len(genome) - k +1)):
+        if count[i] == m:
+            if genome[i:i+k] not in frequentpatterns:
+                frequentpatterns.append(genome[i:i+k])
+    return frequentpatterns
+
+def patterncount(genome, pattern):
+    count = 0
+    for i in range(0, (len(genome) - len(pattern)) + 1):
+        if genome[i:i+len(pattern)] == pattern:
+            count = count + 1
+    return count
+
+genome = 'CGGAAGCGAGATTCGCGTGGCGTGATTCCGGCGGGCGTGGAGAAGCGAGATTCATTCAAGCCGGGAGGCGTGGCGTGGCGTGGCGTGCGGATTCAAGCCGGCGGGCGTGATTCGAGCGGCGGATTCGAGATTCCGGGCGTGCGGGCGTGAAGCGCGTGGAGGAGGCGTGGCGTGCGGGAGGAGAAGCGAGAAGCCGGATTCAAGCAAGCATTCCGGCGGGAGATTCGCGTGGAGGCGTGGAGGCGTGGAGGCGTGCGGCGGGAGATTCAAGCCGGATTCGCGTGGAGAAGCGAGAAGCGCGTGCGGAAGCGAGGAGGAGAAGCATTCGCGTGATTCCGGGAGATTCAAGCATTCGCGTGCGGCGGGAGATTCAAGCGAGGAGGCGTGAAGCAAGCAAGCAAGCGCGTGGCGTGCGGCGGGAGAAGCAAGCGCGTGATTCGAGCGGGCGTGCGGAAGCGAGCGG'
+k = 12
+
+anz = genome.count(max(frequentwords(genome, k)))
+
+print('input    :', genome)
+print('output   :', frequentwords(genome, k))
+print('Anzahl der Wiederholungen:', anz)
